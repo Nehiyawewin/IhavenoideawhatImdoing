@@ -1,6 +1,6 @@
 require 'sinatra'
 require 'json'
-require 'sinatra/reloader' if development?
+require_relative 'messages'
 
 before do
   if request.content_type == 'application/json'
@@ -14,10 +14,8 @@ configure do
   set :public_folder, 'public'
 end
 
-get '/messages' do
-  content_type :json
-  { message: 'Hello, world!' }.to_json
-end
+# Include the messages routes
+require_relative 'messages'
 
 # Start the server
 set :port, 3000
